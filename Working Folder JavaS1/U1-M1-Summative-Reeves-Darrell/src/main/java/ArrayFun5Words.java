@@ -21,5 +21,3 @@ public class ArrayFun5Words {
 }
 
 
-//This solution must be contained in a Java file called ArrayFun5Words.
-//Your code must get 5 words from the user, put them in an array, and print the array elements to the screen.

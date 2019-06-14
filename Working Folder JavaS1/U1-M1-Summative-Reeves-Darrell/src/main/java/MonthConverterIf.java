@@ -24,9 +24,9 @@ public class MonthConverterIf {
             System.out.println("February");
         } else if (userChoice == 3){
             System.out.println("March");
-        } else if (userChoice == 3){
+        } else if (userChoice == 4){
             System.out.println("April");
-        } else if (userChoice == 3){
+        } else if (userChoice == 5){
             System.out.println("May");
         } else if (userChoice == 6){
             System.out.println("June");
