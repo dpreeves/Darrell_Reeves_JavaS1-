@@ -1,0 +1,1 @@
+0: Dog, 1: Cat, 2: Bird, 3: Snake, 4: Hamster, 5: Rabbit
