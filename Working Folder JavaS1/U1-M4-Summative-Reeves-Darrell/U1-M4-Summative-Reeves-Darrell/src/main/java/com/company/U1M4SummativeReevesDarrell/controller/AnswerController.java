@@ -4,11 +4,13 @@ import com.company.U1M4SummativeReevesDarrell.model.Answer;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+@RestController
 public class AnswerController {
 
     List<String> answerList = new ArrayList<>();

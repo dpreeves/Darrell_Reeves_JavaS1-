@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+@RestController
 public class QuoteController {
 
     List<Quote> quoteList = new ArrayList<>();

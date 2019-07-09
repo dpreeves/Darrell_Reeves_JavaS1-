@@ -3,11 +3,13 @@ package com.company.U1M4SummativeReevesDarrell.controller;
 import com.company.U1M4SummativeReevesDarrell.model.Definition;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+@RestController
 public class DefinitionController {
 
     private List<Definition> definitionList = new ArrayList<>();
