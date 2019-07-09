@@ -27,7 +27,7 @@ public class DefinitionController {
 
     Random rand = new Random();
 
-    @RequestMapping(value = "/definition", method = RequestMethod.GET)
+    @RequestMapping(value = "/word", method = RequestMethod.GET)
     public Definition getDefinition(){
         definitionList.add(definition1);
         definitionList.add(definition2);
