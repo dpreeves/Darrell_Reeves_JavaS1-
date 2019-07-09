@@ -1,0 +1,88 @@
+openapi: 3.0.0
+info:
+  title: MotoInventory Service
+  description: >-
+    A simple service that allows CRUD operations for a quote system, a word of the day system, and a magic 8-ball service.
+  version: 0.0.1
+servers:
+  - url: 'http://localhost:8080'
+    description: Local dev server
+paths:     
+  /quote:
+    
+    get:
+      summary: Retrieves random quote.
+     
+       
+      responses:
+        '200':
+          description: Quote object 
+          content:
+            application/json:
+              schema:
+                
+                $ref: '#/components/schemas/Quote'
+  /word:
+    get:
+      summary: Retrieves random word.
+       
+      responses:
+        '200':
+          description: Definition object .
+          content:
+            application/json:
+              schema:
+                
+                $ref: '#/components/schemas/Definition'
+  /magic:
+    post:
+      summary: Generates random response to given question.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Answer'
+      responses:
+        '201':
+          description: An answer object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Answer'
+        '400':
+          description: Invalid request syntax.
+        '422':
+          description: Incomplete answer information. 
+  
+# This section defines the different objects that goes back and forth as JSON
+components:
+  schemas:
+    Quote:
+      properties:
+        Author:
+          type: string
+        Quote:
+          type: string
+      required: 
+        - Author
+        - Quote
+    Definition:
+      properties:
+        Word:
+          type: string
+        Definition:
+          type: string
+      required: 
+        - Word
+        - Definition
+    Answer:
+      properties:
+        Question:
+          type: string
+        Answer:
+          type: string
+      required: 
+        - Question
+        - Answer
+        
