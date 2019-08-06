@@ -1,11 +1,15 @@
 package com.trilogyed.tasker.model;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class Task {
 
+    @NotNull
     private int id;
+    @NotEmpty
     private String description;
     private LocalDate createDate;
     private LocalDate dueDate;
