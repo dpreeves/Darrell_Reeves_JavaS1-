@@ -48,7 +48,7 @@ public class BookDaoJdbcTemplateImpl implements BookDao {
         return book;
     }
 
-    @Transactional
+
     public Book getBook(Integer book_id){
         try{
             return jdbcTemplate.queryForObject(SELECT_BOOK_SQL, this::mapRowToBook, book_id);
@@ -57,17 +57,17 @@ public class BookDaoJdbcTemplateImpl implements BookDao {
         }
     }
 
-    @Transactional
+
     public List<Book> getAllBooks(){
         return jdbcTemplate.query(SELECT_ALL_BOOKS_SQL, this::mapRowToBook);
     }
 
-    @Transactional
+
     public List<Book> getBooksByAuthor(Integer author_id){
         return jdbcTemplate.query(SELECT_BOOKS_BY_AUTHOR_SQL, this::mapRowToBook, author_id);
     }
 
-    @Transactional
+
     public void updateBook(Book book){
         jdbcTemplate.update(
                 UPDATE_BOOK_SQL,

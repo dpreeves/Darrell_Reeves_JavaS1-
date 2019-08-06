@@ -36,7 +36,7 @@ public class AuthorDaoJdbcTemplateImpl {
         return author;
     }
 
-    @Transactional
+
     public Author getAuthor(Integer author_id){
         try{
             return jdbcTemplate.queryForObject(SELECT_AUTHOR_SQL, this::mapRowToAuthor);
@@ -45,17 +45,17 @@ public class AuthorDaoJdbcTemplateImpl {
         }
     }
 
-    @Transactional
+
     public List<Author> getAllAuthors(){
         return jdbcTemplate.query(SELECT_ALL_AUTHORS_SQL, this::mapRowToAuthor);
     }
 
-    @Transactional
+
     public void updateAuthor(Author author){
         jdbcTemplate.update(UPDATE_AUTHOR_SQL,author.getAuthor_id(), author.getFirst_name(), author.getLast_name(), author.getStreet(), author.getCity(), author.getState(), author.getPostal_code(), author.getPhone(), author.getEmail());
     }
 
-    @Transactional
+
     public void deleteAuthor(Integer author_id){
         jdbcTemplate.update(DELETE_AUTHOR_SQL, author_id);
     }

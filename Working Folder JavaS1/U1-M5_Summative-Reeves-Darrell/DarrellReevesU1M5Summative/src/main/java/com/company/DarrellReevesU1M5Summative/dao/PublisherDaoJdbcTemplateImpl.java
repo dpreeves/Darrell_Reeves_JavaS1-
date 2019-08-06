@@ -36,7 +36,7 @@ public class PublisherDaoJdbcTemplateImpl {
             return publisher;
         }
 
-        @Transactional
+
         public Publisher getPublisher(Integer publisher_id){
             try{
                 return jdbcTemplate.queryForObject(SELECT_PUBLISHER_SQL, this::mapRowToPublisher);
@@ -45,17 +45,17 @@ public class PublisherDaoJdbcTemplateImpl {
             }
         }
 
-        @Transactional
+
         public List<Publisher> getAllPublishers(){
             return jdbcTemplate.query(SELECT_ALL_PUBLISHERS, this::mapRowToPublisher);
         }
 
-        @Transactional
+
         public void updatePublisher(Publisher publisher){
             jdbcTemplate.update(UPDATE_PUBLISHER_SQL, publisher.getPublisher_id(), publisher.getName(), publisher.getStreet(), publisher.getCity(), publisher.getState(), publisher.getPostal_code(), publisher.getPhone(), publisher.getEmail());
         }
 
-        @Transactional
+
         public void deletePublisher(Integer publisher_id){
             jdbcTemplate.update(DELETE_PUBLISHER_SQL, publisher_id);
         }
