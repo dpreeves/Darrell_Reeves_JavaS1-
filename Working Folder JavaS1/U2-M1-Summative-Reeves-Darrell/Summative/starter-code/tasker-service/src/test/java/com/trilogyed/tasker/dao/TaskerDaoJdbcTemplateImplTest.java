@@ -37,8 +37,8 @@ public class TaskerDaoJdbcTemplateImplTest {
     public void addGetDeleteTask(){
         Task task = new Task();
         task.setDescription("get groceries");
-        task.setCreateDate(LocalDate.now());
-        task.setDueDate(LocalDate.now().plus(3, ChronoUnit.DAYS));
+        task.setCreateDate(LocalDate.of(2019,1,1));
+        task.setDueDate(LocalDate.of(2019, 1 , 5));
         task.setCategory("personal");
 
         task = dao.createTask(task);

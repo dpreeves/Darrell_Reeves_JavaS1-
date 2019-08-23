@@ -57,7 +57,7 @@ public class TaskerServiceLayer {
     public TaskViewModel newTask(TaskViewModel taskViewModel) {
 
         Task task = new Task();
-        task.setDescription(task.getDescription());
+        task.setDescription(taskViewModel.getDescription());
         task.setCreateDate(taskViewModel.getCreateDate());
         task.setDueDate(taskViewModel.getDueDate());
         task.setCategory(taskViewModel.getCategory());

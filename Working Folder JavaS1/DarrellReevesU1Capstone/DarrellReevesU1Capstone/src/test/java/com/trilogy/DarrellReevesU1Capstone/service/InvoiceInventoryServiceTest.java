@@ -160,6 +160,6 @@ public class InvoiceInventoryServiceTest {
         List<Console> consoleList = new ArrayList<>();
         consoleList.add(console);
 
-        console = inventoryService.
+//        console = inventoryService.
     }
 }

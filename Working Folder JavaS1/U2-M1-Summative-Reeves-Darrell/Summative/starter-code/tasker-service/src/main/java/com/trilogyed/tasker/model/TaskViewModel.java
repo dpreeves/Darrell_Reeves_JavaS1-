@@ -1,6 +1,7 @@
 package com.trilogyed.tasker.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class TaskViewModel {
     private int id;
@@ -57,4 +58,36 @@ public class TaskViewModel {
     public void setAdvertisement(String advertisement) {
         this.advertisement = advertisement;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TaskViewModel that = (TaskViewModel) o;
+        return id == that.id &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(createDate, that.createDate) &&
+                Objects.equals(dueDate, that.dueDate) &&
+                Objects.equals(category, that.category) &&
+                Objects.equals(advertisement, that.advertisement);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, description, createDate, dueDate, category, advertisement);
+    }
+
+    @Override
+    public String toString() {
+        return "TaskViewModel{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", createDate=" + createDate +
+                ", dueDate=" + dueDate +
+                ", category='" + category + '\'' +
+                ", advertisement='" + advertisement + '\'' +
+                '}';
+    }
 }
+
+

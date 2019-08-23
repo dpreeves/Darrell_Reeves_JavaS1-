@@ -19,17 +19,23 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
 public class TaskServiceTest {
+
     TaskerDao taskerDao;
     TaskerServiceLayer taskerServiceLayer;
-
-    @Autowired
-    private AdserverServiceClient client;
+    AdserverServiceClient client;
 
     @Before
     public void setUp()throws Exception{
         setUpTaskerDaoMock();
+        setUpAdserverServiceMock();
 
         taskerServiceLayer = new TaskerServiceLayer(client, taskerDao);
+    }
+
+    private void setUpAdserverServiceMock(){
+        client = mock(AdserverServiceClient.class);
+
+        doReturn("chilli dog").when(client).getAd();
     }
 
     private void setUpTaskerDaoMock(){
@@ -38,14 +44,14 @@ public class TaskServiceTest {
         Task task = new Task();
         task.setId(1);
         task.setDescription("get groceries");
-        task.setCreateDate(LocalDate.now());
-        task.setDueDate(LocalDate.now().plus(3, ChronoUnit.DAYS));
+        task.setCreateDate(LocalDate.of(2019,1,1));
+        task.setDueDate(LocalDate.of(2019,1,5));
         task.setCategory("personal");
 
         Task task1 = new Task();
         task1.setDescription("get groceries");
-        task1.setCreateDate(LocalDate.now());
-        task1.setDueDate(LocalDate.now().plus(3, ChronoUnit.DAYS));
+        task1.setCreateDate(LocalDate.of(2019,1,1));
+        task1.setDueDate(LocalDate.of(2019,1,5));
         task1.setCategory("personal");
 
 //        Task task2 = new Task();
@@ -64,7 +70,7 @@ public class TaskServiceTest {
         doReturn(task).when(taskerDao).createTask(task1);
         doReturn(task).when(taskerDao).getTask(1);
         doReturn(taskList).when(taskerDao).getAllTasks();
-        doReturn(personalList).when(taskerDao).getTasksByCategory("personal");
+        doReturn(taskList).when(taskerDao).getTasksByCategory("personal");
 
     }
 
@@ -72,8 +78,8 @@ public class TaskServiceTest {
     public void saveFindTask(){
         TaskViewModel task = new TaskViewModel();
         task.setDescription("get groceries");
-        task.setCreateDate(LocalDate.now());
-        task.setDueDate(LocalDate.now().plus(3, ChronoUnit.DAYS));
+        task.setCreateDate(LocalDate.of(2019,1,1));
+        task.setDueDate(LocalDate.of(2019,1,5));
         task.setCategory("personal");
 
         task = taskerServiceLayer.newTask(task);
@@ -86,19 +92,19 @@ public class TaskServiceTest {
         TaskViewModel task = new TaskViewModel();
         task.setId(1);
         task.setDescription("get groceries");
-        task.setCreateDate(LocalDate.now());
-        task.setDueDate(LocalDate.now().plus(3, ChronoUnit.DAYS));
+        task.setCreateDate(LocalDate.of(2019,1,1));
+        task.setDueDate(LocalDate.of(2019,1,5));
         task.setCategory("personal");
-        task.setAdvertisement(client.getAd());
+        task.setAdvertisement("chilli dog");
 
         taskerServiceLayer.newTask(task);
 
         TaskViewModel task1 = new TaskViewModel();
         task1.setDescription("get groceries");
-        task1.setCreateDate(LocalDate.now());
-        task1.setDueDate(LocalDate.now().plus(3, ChronoUnit.DAYS));
+        task1.setCreateDate(LocalDate.of(2019,1,1));
+        task1.setDueDate(LocalDate.of(2019,1,5));
         task1.setCategory("personal");
-        task.setAdvertisement(client.getAd());
+        task.setAdvertisement("chilli dog");
 
         taskerServiceLayer.newTask(task1);
 
@@ -107,9 +113,11 @@ public class TaskServiceTest {
         assertEquals(task, taskViewModelList.get(0));
 
         List<TaskViewModel> personalList = taskerServiceLayer.fetchTasksByCategory("personal");
-        assertEquals(2,personalList.size());
+        assertEquals(1,personalList.size());
         assertEquals(task, personalList.get(0));
     }
+
+
 
 
 

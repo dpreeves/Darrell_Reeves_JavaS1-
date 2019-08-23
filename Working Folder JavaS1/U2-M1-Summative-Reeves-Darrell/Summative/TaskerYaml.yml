@@ -1,0 +1,124 @@
+openapi: 3.0.0
+info:
+  version: 0.0.1
+  title: Tasker Service
+
+servers:
+  - url: http://localhost:8181
+    description: Local dev server
+
+paths:
+  /tasks:
+    post:
+      summary: Create a new task
+      description: Add new task object to the DB
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schema/TaskerViewModel'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schema/TaskerViewModel'
+    get:
+      summary: Get all tasks
+      description: Get list of all task in DB
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskerViewModelList'
+    put:
+      summary: Update a task
+      description: Update a task object in the DB
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schema/TaskerViewModel'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schema/TaskerViewModel'
+  /tasks/{id}:
+    get:
+      summary: Get task object by id
+      description: Queries for task object in DB
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: task id
+          schema:
+            type: number
+      responses:
+        '200': 
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskerViewModelList'
+  /tasks/category/{category}:
+     get:
+      summary: Get list of task objects by category
+      description: Queries for task objects by category
+      parameters: 
+        - name: category
+          in: path
+          required: true
+          description: category
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskViewModelList'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: string
+
+components:
+  schemas:
+    TaskViewModel:
+      type: object
+      properties:
+        id:
+          type: number
+        description:
+          type: string
+        createDate:
+          type: string
+        dueDate:
+          type: string
+        category:
+          type: string
+        advertisement:
+          type: string
+
+    TaskerViewModelList:
+      type: array
+      items:
+        $ref: '#/components/schema/TaskViewModel'

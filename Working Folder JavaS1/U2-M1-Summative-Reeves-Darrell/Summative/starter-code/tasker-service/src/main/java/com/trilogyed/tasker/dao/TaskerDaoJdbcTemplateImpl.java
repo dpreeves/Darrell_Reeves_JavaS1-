@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,7 +26,7 @@ public class TaskerDaoJdbcTemplateImpl implements TaskerDao {
     public static final String UPDATE_TASK =
             "update task set task_description = ?, create_date = ?, due_date = ?, category = ? where task_id = ?";
     public static final String DELETE_TASK =
-            "delete from task";
+            "delete from task where task_id = ?";
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -35,6 +36,7 @@ public class TaskerDaoJdbcTemplateImpl implements TaskerDao {
     }
 
     @Override
+    @Transactional
     public Task createTask(Task task) {
         jdbcTemplate.update(
                 INSERT_TASK,
@@ -52,7 +54,7 @@ public class TaskerDaoJdbcTemplateImpl implements TaskerDao {
     @Override
     public Task getTask(int id) {
         try {
-            return jdbcTemplate.queryForObject(SELECT_TASK_BY_ID, this::mapRowToTask);
+            return jdbcTemplate.queryForObject(SELECT_TASK_BY_ID, this::mapRowToTask, id);
         } catch (
                 EmptyResultDataAccessException e) {
             return null;
@@ -61,20 +63,16 @@ public class TaskerDaoJdbcTemplateImpl implements TaskerDao {
 
     @Override
     public List<Task> getAllTasks() {
-        try {
+
             return jdbcTemplate.query(SELECT_ALL_TASKS, this::mapRowToTask);
-        } catch (NullPointerException e){
-            return null;
-        }
+
     }
 
     @Override
     public List<Task> getTasksByCategory(String category) {
-        try{
-            return jdbcTemplate.query(SELECT_TASKS_BY_CATEGORY, this::mapRowToTask);
-        } catch (NullPointerException e){
-            return null;
-        }
+
+            return jdbcTemplate.query(SELECT_TASKS_BY_CATEGORY, this::mapRowToTask, category);
+
     }
 
     @Override
